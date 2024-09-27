@@ -1,0 +1,51 @@
+.footer {
+    background-color: #333;
+    color: white;
+    padding: 10px; /* Reduced padding */
+    margin-top: 20px; /* Reduced margin to bring it closer to the content above */
+    position: relative; /* Ensure it remains in the flow of the page */
+}
+
+.footer-branches {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allow branches to wrap to the next line if necessary */
+}
+
+.branch {
+    flex: 1; /* Distribute space evenly */
+    min-width: 200px; /* Ensure each branch has a minimum width */
+    margin: 0 10px; /* Space between branches */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.branch h4 {
+    font-size: 1em; /* Reduced font size */
+    margin-bottom: 8px; /* Reduced margin */
+}
+
+.branch p {
+    margin: 3px 0; /* Reduced margin */
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px; /* Reduced margin */
+}
+
+.footer-socials {
+    display: flex;
+    gap: 10px; /* Reduced gap */
+}
+
+.footer-socials a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9em; /* Reduced font size */
+}
+
+.footer-emails {
+    text-align: right;
+    font-size: 0.9em; /* Reduced font size */
+}

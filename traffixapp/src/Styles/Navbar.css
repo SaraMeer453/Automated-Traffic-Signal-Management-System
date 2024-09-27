@@ -1,0 +1,47 @@
+.navbar-brand {
+    font-weight: bold;
+}
+
+/* Center the navbar links and add space between them */
+.navbar-nav {
+    display: flex;
+    justify-content: center; /* Center the navbar items */
+    gap: 30px; /* Add space between the navbar items */
+    width: 100%;
+}
+
+/* Navbar link styles */
+.nav-link {
+    color: #fff !important; /* Ensure text is white */
+    font-size: 22px; /* Adjust font size */
+    padding: 10px 20px; /* Add padding for more clickable area */
+    white-space: nowrap; /* Prevent text from breaking into a new line */
+}
+
+/* Navbar styles */
+.navbar {
+    margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+    padding: 10px 0; /* Add padding to ensure enough space for links */
+}
+
+/* Navbar link hover styles */
+.nav-link:hover {
+    color: #ddd !important; /* Light gray on hover for better visibility */
+}
+
+/* Logo styles */
+.logo {
+    width: 150px;
+    height: auto;
+    position: absolute; /* Position logo to the right */
+    right: 20px;
+    top: 10px;
+}
+
+/* Remove blue border when LogOut button is clicked or focused */
+.nav-link:focus,
+.nav-link:active {
+    outline: none;
+    box-shadow: none; /* Remove any box shadow (browser-specific outline) */
+}

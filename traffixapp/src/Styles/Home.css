@@ -1,0 +1,32 @@
+/* src/Styles/Home.css */
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Full viewport height */
+    background-image: url('../Images/homepagebackground.jpg'); /* Set background image */
+    background-size: cover; /* Ensure the background image covers the entire container */
+    background-position: center; /* Center the background image */
+    color: #fff; /* Set text color to white */
+}
+
+/* Navbar and Footer styling */
+.navbar, .footer {
+    width: 100%;
+}
+
+/* Body content styling */
+.body-content {
+    flex: 1; /* Take up the remaining space */
+    padding: 20px;
+    background-color: transparent; /* Remove background color */
+    color: #fff; /* Ensure text inside .body-content is white */
+    text-align: center; /* Center-align text */
+}
+
+h1 {
+    font-family: 'Dancing'; /* Apply Dancing Script font */
+    font-weight: bolder;
+    margin: 0; /* Remove default margin */
+    font-size: 3rem; /* Adjust the font size if needed */
+}
