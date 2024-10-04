@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import LeftNavbar from '../Components/LeftNavbar'; // Import the new component
+import Navbar from '../Components/Navbar';
 import '../Styles/UpdateInfo.css';
 
 const UpdateInfo = () => {
@@ -9,6 +11,10 @@ const UpdateInfo = () => {
     cnic: '',
     password: '',
     confirmPassword: '',
+    oldPassword: '',
+    newPassword: '',
+    confirmNewPassword: '',
+    phoneNumber: '',
     area: '',
     sector: '',
   });
@@ -22,6 +28,7 @@ const UpdateInfo = () => {
       cnic: '12345-6789012-3',
       password: 'password123',
       confirmPassword: 'password123',
+      phoneNumber: '1234567890',
       area: 'Islamabad',
       sector: 'Sector1'
     };
@@ -33,94 +40,120 @@ const UpdateInfo = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSavePassword = (e) => {
     e.preventDefault();
-    // Logic to handle updating user info
-    console.log('Updated user data submitted:', formData);
-    navigate('/home'); // Redirect to home page after updating info
+    // Logic to handle password update
+    console.log('Updated password data submitted:', {
+      oldPassword: formData.oldPassword,
+      newPassword: formData.newPassword,
+    });
+    // Reset password fields after saving
+    setFormData({ ...formData, oldPassword: '', newPassword: '', confirmNewPassword: '' });
+  };
+
+  const handleSavePhoneNumber = (e) => {
+    e.preventDefault();
+    // Logic to handle phone number update
+    console.log('Updated phone number submitted:', formData.phoneNumber);
+    // Reset phone number field after saving
+    setFormData({ ...formData, phoneNumber: '' });
+  };
+
+  const handleSaveUsername = (e) => {
+    e.preventDefault();
+    // Logic to handle username update
+    console.log('Updated username submitted:', formData.username);
+    // Reset username field after saving
+    setFormData({ ...formData, username: '' });
   };
 
   return (
     <div className="updateinfo-container">
+                <LeftNavbar /> {/* Add this line */}
+                <Navbar />
+
       <h2>Update Info</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-          />
+
+      <div className="update-container-wrapper">
+        {/* Change Password Container */}
+        <div className="update-container">
+          <h3>Change Password</h3>
+          <form onSubmit={handleSavePassword}>
+            <div className="form-group">
+              <label htmlFor="oldPassword">Old Password:</label>
+              <input
+                type="password"
+                id="oldPassword"
+                name="oldPassword"
+                value={formData.oldPassword}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="newPassword">New Password:</label>
+              <input
+                type="password"
+                id="newPassword"
+                name="newPassword"
+                value={formData.newPassword}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="confirmNewPassword">Confirm New Password:</label>
+              <input
+                type="password"
+                id="confirmNewPassword"
+                name="confirmNewPassword"
+                value={formData.confirmNewPassword}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <button type="submit">Save</button>
+          </form>
         </div>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
+
+        {/* Change Phone Number Container */}
+        <div className="update-container">
+          <h3>Change Phone Number</h3>
+          <form onSubmit={handleSavePhoneNumber}>
+            <div className="form-group">
+              <label htmlFor="phoneNumber">Phone Number:</label>
+              <input
+                type="text"
+                id="phoneNumber"
+                name="phoneNumber"
+                value={formData.phoneNumber}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <button type="submit">Save</button>
+          </form>
         </div>
-        <div className="form-group">
-          <label htmlFor="cnic">CNIC:</label>
-          <input
-            type="text"
-            id="cnic"
-            name="cnic"
-            value={formData.cnic}
-            onChange={handleChange}
-            required
-          />
+
+        {/* Change Username Container */}
+        <div className="update-container">
+          <h3>Change Username</h3>
+          <form onSubmit={handleSaveUsername}>
+            <div className="form-group">
+              <label htmlFor="username">Username:</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <button type="submit">Save</button>
+          </form>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="confirmPassword">Confirm Password:</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="area">Area:</label>
-          <input
-            type="text"
-            id="area"
-            name="area"
-            value={formData.area}
-            readOnly
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="sector">Sector:</label>
-          <input
-            type="text"
-            id="sector"
-            name="sector"
-            value={formData.sector}
-            readOnly
-          />
-        </div>
-        <button type="submit">Update</button>
-      </form>
+      </div>
     </div>
   );
 };

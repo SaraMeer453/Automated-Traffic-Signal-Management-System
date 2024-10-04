@@ -1,19 +1,56 @@
 /* Login.css */
+
+
+.login-page {
+  display: flex; /* Use flexbox for the main container */
+  height: 100vh;
+  background-color: #000000; /* Set a dark background color */
+  flex-basis: 45%; /* Set the width to 45% */
+
+}
+
 .login-container {
   max-width: 400px;
-  margin: 50px auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #f9f9f9;
-  position: relative; /* Make sure the container is positioned relative */
+  margin: auto;
+  margin-left: -50px; /* Move the container to the left */
+  border-radius: 18px;
+  position: relative;
+  z-index: 1; /* Bring the login form above the image */
+  background-color: #ffffffe6; /* Change background to white */
+  padding: 100px; /* Increase padding for more space */
+}
+
+
+
+
+.image-container {
+  flex: 1; /* Take up the remaining space */
+  flex-basis: 55%; /* Set a minimum width of 55% */
+  background-color: #ffffff; /* Lighter background for the image */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container img {
+  width: 1000px; /* Adjust image size as needed */
+  height: 500px;
+  object-fit: fill;
+  
+}
+
+body.login-body {
+  background-color: black; /* Left side black background for login page */
+  margin: 0; /* Remove default margin */
 }
 
 .login-container h2 {
   text-align: center;
   color: #333;
+  position: relative;
+  z-index: 2; /* Ensure the logo is behind the text */
 }
+
 
 .form-group {
   margin-bottom: 15px;
@@ -36,29 +73,20 @@
 button {
   width: 100%;
   padding: 10px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: #000000;
+  color: #000000;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #555657;
 }
 
 p {
   text-align: center;
   margin-top: 15px;
-}
-
-a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
 }
 
 .error-message {
@@ -68,8 +96,20 @@ a:hover {
   margin-top: 10px;
 }
 
-.homepage-link {
-  display: inline-block;
-  margin-top: 10px;
-  font-size: 14px;
+.link-button {
+  background: none;
+  color: #007bff; /* Adjust this color to match your design */
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: inherit; /* Inherit font size from parent */
+  padding: 0; /* Remove default button padding */
+  outline: none; /* Remove the outline for better aesthetics */
 }
+
+.link-button:hover {
+  background: none; /* Remove background on hover */
+  color: #0056b3; /* Darken the text color on hover (optional) */
+}
+
+

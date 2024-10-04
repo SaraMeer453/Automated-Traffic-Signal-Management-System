@@ -1,47 +1,53 @@
-import React from 'react';
+// Navbar.js
+import React, { useState } from 'react'; // Import useState
 import { Link, useNavigate } from 'react-router-dom';
-import logo from '../Images/traffixlogo.png'; // Ensure correct extension
 import '../Styles/Navbar.css'; // Import CSS file
 
 export default function Navbar() {
+  const [searchTerm, setSearchTerm] = useState(''); // State to hold the search term
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Display a confirmation dialog
     const confirmLogout = window.confirm('Are you sure you want to log out?');
 
     if (confirmLogout) {
-      // Perform logout logic here (e.g., clearing user session)
       localStorage.removeItem('user'); // Example
-
-      // Redirect to login page
       navigate('/login');
     }
-    // If canceled, do nothing and stay on the current page
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value); // Update the search term state
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    // Implement your search logic here (e.g., redirect to search results)
+    console.log('Searching for:', searchTerm); // Placeholder for actual search logic
   };
 
   return (
     <div className="navbar-container">
-      <nav className="navbar navbar-expand-lg navbar-light">
-        <div className="container-fluid">
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav">
-              <Link className="nav-link home-link" to="/home">Home</Link>
-              <Link className="nav-link" to="/how-it-works">How it works</Link>
-              <Link className="nav-link" to="/dashboard">Dashboard</Link>
-              <Link className="nav-link" to="/challan">Challan</Link>
-              <Link className="nav-link" to="/about-us">About Us</Link>
-              <button className="nav-link btn btn-link" onClick={handleLogout}>LogOut</button>
-            </div>
-          </div>
-          <Link className="navbar-brand" to="/home">
-            <img src={logo} alt="Logo" className="logo" />
-          </Link>
-        </div>
-      </nav>
+      
+      <div className="button-container">
+        <Link className="button" to="/home">Home</Link>
+        <Link className="button" to="/how-it-works">How&nbsp;it&nbsp;works?</Link>
+        <Link className="button" to="/alerts">Alerts</Link>
+        <Link className="button" to="/challan">Challan</Link>
+        <Link className="button" to="/signalcontrol">Signal&nbsp;Control</Link>
+        
+        <button className="button logout" onClick={handleLogout}>Log Out</button>
+        <form onSubmit={handleSearchSubmit}>
+          <input
+            type="text"
+            className="search-bar"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
+        </form>
+      </div>
     </div>
   );
 }
+

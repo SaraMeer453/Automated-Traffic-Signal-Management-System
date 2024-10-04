@@ -1,10 +1,7 @@
-/* src/Styles/How-it-works.css */
-
 .how-it-works-container {
     display: flex;
-    flex-direction: column;
     min-height: 100vh; /* Full viewport height */
-    background-image: url('../Images/homepagebackground.jpg'); /* Set background image */
+    background-color: #ffffff; /* Set background color to white */
     background-size: cover; /* Ensure the background image covers the entire container */
     background-position: center; /* Center the background image */
 }
@@ -13,10 +10,38 @@
     flex: 1; /* Take up the remaining space */
     padding: 20px;
     background-color: rgba(249, 249, 249, 0.8); /* Slightly transparent background */
-    color: #fff; /* Ensure text color is white */
+    color: #000; /* Ensure text color is black for visibility */
     text-align: center; /* Center-align text */
+    margin-left: 300px; /* Create space for LeftNavbar */
+}
+
+.video-section {
+    display: flex; /* Use flexbox to align text and video */
+    margin: 20px 0; /* Add margin for spacing */
+}
+
+.text-container {
+    flex: 1; /* Allow the text container to take up space */
+    padding: 20px; /* Add padding for aesthetics */
+}
+
+.video-container {
+    flex: 1; /* Allow the video container to take up space */
+    display: flex;
+    justify-content: center; /* Center the video */
+    align-items: center; /* Align video vertically */
 }
 
 h1 {
     margin: 0; /* Remove default margin */
+    color: #000000; /* Set color for heading */
+}
+
+h2 {
+    margin: 0; /* Remove default margin */
+    color: #000000; /* Set color for heading */
+}
+
+p {
+    color: #000000; /* Set color for paragraph text */
 }

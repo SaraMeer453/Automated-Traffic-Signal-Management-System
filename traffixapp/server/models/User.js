@@ -4,12 +4,21 @@ const bcrypt = require('bcryptjs'); // Import bcryptjs
 // Define the user schema
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
+  employeeId: { type: String, required: true, unique: true }, // Unique employee ID
+  email: { type: String, required: true, unique: true }, // Unique email
   cnic: { type: String, required: true },
   password: { type: String, required: true },
   area: { type: String, required: true },
   sector: { type: String, required: true },
+
 });
+
+
+
+
+
+
+
 
 // Hash the password before saving
 userSchema.pre('save', async function(next) {

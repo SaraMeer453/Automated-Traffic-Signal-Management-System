@@ -1,0 +1,41 @@
+.left-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px; /* Increase the width */
+  height: 100vh;
+  background-color: #000000; /* Dark gray background */
+  color: #fff; /* White text */
+  padding: 20px;
+  z-index: 100; /* Higher z-index for the left navbar */
+}
+
+
+.left-navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 100px 0 0 10px; /* Move the content downwards */
+}
+
+.left-navbar li {
+  margin-bottom: 15px; /* Increase the space between list items */
+}
+
+.left-navbar a {
+  text-decoration: none;
+  color: inherit;
+  font-size: 18px; /* Increase font size */
+  padding: 12px;
+  display: block;
+}
+
+.left-navbar a:hover {
+  background-color: #8d8d8d;
+}
+
+.logo {
+  width: 150px;
+  height: auto;
+  margin: 20px 0 0 45px; /* Move the content downwards */
+
+}

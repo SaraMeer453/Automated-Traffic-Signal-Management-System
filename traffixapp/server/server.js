@@ -10,12 +10,9 @@ app.use(express.json());
 app.use(cors());
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://i210644:GdBjlhUnmpZOVa4e@traffix-database.ve2gr.mongodb.net/?retryWrites=true&w=majority&appName=Traffix-Database', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-.then(() => console.log('MongoDB connected'))
-.catch(err => console.error('MongoDB connection error:', err));
+mongoose.connect('mongodb+srv://i210644:GdBjlhUnmpZOVa4e@traffix-database.ve2gr.mongodb.net/?retryWrites=true&w=majority&appName=Traffix-Database')
+    .then(() => console.log('MongoDB connected'))
+    .catch(err => console.error('MongoDB connection error:', err));
 
 // Use the authRouter for authentication routes
 app.use('/api/auth', authRouter);

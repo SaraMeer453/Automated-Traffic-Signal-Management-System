@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs'); // Import bcryptjs
 // Sign-up route
 router.post('/signup', async (req, res) => {
     try {
-        const { username, email, cnic, password, confirmPassword, area, sector } = req.body;
+        const { username, employeeId, email, cnic, password, confirmPassword, area, sector } = req.body;
 
         if (password !== confirmPassword) {
             return res.status(400).json({ message: 'Passwords do not match' });
@@ -19,6 +19,12 @@ router.post('/signup', async (req, res) => {
             return res.status(400).json({ message: 'User already exists' });
         }
 
+        // Check if employeeId already exists
+        const existingEmployeeId = await User.findOne({ employeeId });
+        if (existingEmployeeId) {
+            return res.status(400).json({ message: 'Employee ID already exists' });
+        }
+
         // Hash the password
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
@@ -26,6 +32,7 @@ router.post('/signup', async (req, res) => {
         // Create a new user instance with the hashed password
         const newUser = new User({
             username,
+            employeeId,  // Add employeeId
             email,
             cnic,
             password: hashedPassword,  // Store hashed password
@@ -44,9 +51,13 @@ router.post('/signup', async (req, res) => {
 });
 
 // Login route
+// Login route
 router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
+
+
+        console.log('Login attempt:', { email, password });
 
         // Check if the user exists
         const user = await User.findOne({ email });
@@ -67,6 +78,42 @@ router.post('/login', async (req, res) => {
         res.json({ token });
     } catch (error) {
         console.error('Error during login:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+
+// Get the users from the db
+router.get('/accounts', async (req, res) => {
+    try {
+        const users = await User.find(); // Get all users from the database
+        res.json(users);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+// Update user
+router.put('/accounts/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updatedUser = await User.findByIdAndUpdate(id, req.body, { new: true });
+        res.json(updatedUser);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+// Delete user
+router.delete('/accounts/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        await User.findByIdAndDelete(id);
+        res.json({ message: 'User deleted' });
+    } catch (err) {
+        console.error(err);
         res.status(500).json({ message: 'Server error' });
     }
 });

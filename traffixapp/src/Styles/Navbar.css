@@ -1,47 +1,48 @@
-.navbar-brand {
+.navbar-container {
+    display: flex;
+    justify-content: flex-end; /* Align content to the right */
+    align-items: center;
+    background-color: #fff;
+    padding: 10px 20px;
+    box-shadow: none;
+    width: auto; /* Do not extend full width */
+    position: fixed; /* Fix it to the top */
+    top: 0; /* Align at the top */
+    right: 0; /* Align to the right */
+    z-index: 100; /* Higher z-index to ensure it’s above other elements */
+}
+
+
+.button-container {
+    display: flex;
+    gap: 40px; /* Adjust gap between the buttons */
+    align-items: center;
+    justify-content: flex-end; /* Align buttons to the right */
+}
+
+.button {
+    background-color: transparent;
+    color: #000;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.button:hover {
+    color: #8d8d8d;
+}
+
+.logout {
+    color: #ff0000;
     font-weight: bold;
 }
 
-/* Center the navbar links and add space between them */
-.navbar-nav {
-    display: flex;
-    justify-content: center; /* Center the navbar items */
-    gap: 30px; /* Add space between the navbar items */
-    width: 100%;
-}
-
-/* Navbar link styles */
-.nav-link {
-    color: #fff !important; /* Ensure text is white */
-    font-size: 22px; /* Adjust font size */
-    padding: 10px 20px; /* Add padding for more clickable area */
-    white-space: nowrap; /* Prevent text from breaking into a new line */
-}
-
-/* Navbar styles */
-.navbar {
-    margin-bottom: 20px;
-    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
-    padding: 10px 0; /* Add padding to ensure enough space for links */
-}
-
-/* Navbar link hover styles */
-.nav-link:hover {
-    color: #ddd !important; /* Light gray on hover for better visibility */
-}
-
-/* Logo styles */
-.logo {
-    width: 150px;
-    height: auto;
-    position: absolute; /* Position logo to the right */
-    right: 20px;
-    top: 10px;
-}
-
-/* Remove blue border when LogOut button is clicked or focused */
-.nav-link:focus,
-.nav-link:active {
-    outline: none;
-    box-shadow: none; /* Remove any box shadow (browser-specific outline) */
+.search-bar {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 20px; /* Space between buttons and search bar */
 }

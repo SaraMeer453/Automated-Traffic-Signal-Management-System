@@ -4,9 +4,6 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* Full viewport height */
-    background-image: url('../Images/homepagebackground.jpg'); /* Set background image */
-    background-size: cover; /* Ensure the background image covers the entire container */
-    background-position: center; /* Center the background image */
     color: #fff; /* Set text color to white */
 }
 
@@ -20,8 +17,35 @@
     flex: 1; /* Take up the remaining space */
     padding: 20px;
     background-color: transparent; /* Remove background color */
-    color: #fff; /* Ensure text inside .body-content is white */
+    color: #000000; /* Ensure text inside .body-content is black */
     text-align: center; /* Center-align text */
+    display: flex; /* Use flexbox to center content */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: flex-start; /* Align items at the top */
+    position: relative; /* Make this a positioned container */
+}
+
+/* Black box styling */
+.black-box {
+    width: 900px; /* Match the width of the aerial image */
+    height: 600px; /* Set a fixed height for visibility */
+    background-color: rgb(0, 0, 0); /* Semi-transparent black background */
+    position: absolute; /* Position it absolutely within the body-content */
+    top: calc(20% - 100px); /* Move it up a bit */
+    left: 40%; /* Move it to the right */
+    z-index: -1; /* Make sure it stays behind the image */
+}
+
+
+/* Aerial image styling */
+.aerial-image {
+    position: absolute; /* Allow the image to be positioned absolutely */
+    top: calc(25% - 100px); /* Align with the black box vertically */
+    left: calc(36% + 20px); /* Move the image slightly to the right of the black box */
+    max-width: 900px; /* Limit the maximum width */
+    height: 600px; /* Maintain aspect ratio */
+    z-index: 1; /* Ensure it is above the black box */
 }
 
 h1 {
