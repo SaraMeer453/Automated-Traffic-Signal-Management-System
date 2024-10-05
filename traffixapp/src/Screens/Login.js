@@ -18,6 +18,7 @@ const Login = () => {
     setFormData({ ...formData, [name]: value });
   };
 /////
+/////
 const handleSubmit = async (e) => {
   e.preventDefault();
   if (!formData.email || !formData.password) {
@@ -47,8 +48,8 @@ const handleSubmit = async (e) => {
       setError('An error occurred. Please try again.');
   }
 };
-
-
+/////////////
+/////////////
   return (
     <div className="login-page">
       <div className="logo-container">

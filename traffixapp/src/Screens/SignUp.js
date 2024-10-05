@@ -14,6 +14,7 @@ const SignUp = () => {
     area: '',
     sector: '',
     employeeId: '', // Add employeeId to state
+    phoneNumber: '', // Add phoneNumber to state
   });
   const [sectors, setSectors] = useState([]);
   const navigate = useNavigate();
@@ -42,6 +43,36 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Validate required fields
+    for (const key in formData) {
+      if (!formData[key]) {
+        alert(`${key} cannot be empty.`);
+        return;
+      }
+    }
+
+    // Validate CNIC (must be 13 digits)
+    const cnicRegex = /^\d{13}$/;
+    if (!cnicRegex.test(formData.cnic)) {
+      alert('CNIC must be exactly 13 digits.');
+      return;
+    }
+
+    // Validate Phone Number (must be 11 digits)
+    const phoneRegex = /^\d{11}$/;
+    if (!phoneRegex.test(formData.phoneNumber)) {
+      alert('Phone number must be exactly 11 digits.');
+      return;
+    }
+
+    // Validate Email (must end with @police.gov.pk)
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@police\.gov\.pk$/;
+    if (!emailRegex.test(formData.email)) {
+      alert('Email must end with @police.gov.pk.');
+      return;
+    }
+  
     try {
       const response = await fetch('http://localhost:5000/api/auth/signup', {
         method: 'POST',
@@ -61,13 +92,12 @@ const SignUp = () => {
   };
 
   return (
-   <div className="app-container">
-          <LeftNavbar /> {/* Add this line */}
+    <div className="app-container">
+      <LeftNavbar /> {/* Add this line */}
 
       <Navbar /> {/* Navbar at the top */}
       <div className="signup-container-wrapper">
         <div className="signup-container">
-          {/* <h2>Register New User</h2>  */}
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="username">Username:</label>
@@ -111,6 +141,17 @@ const SignUp = () => {
                 id="cnic"
                 name="cnic"
                 value={formData.cnic}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="phoneNumber">Phone Number:</label>
+              <input
+                type="text"
+                id="phoneNumber"
+                name="phoneNumber"
+                value={formData.phoneNumber}
                 onChange={handleChange}
                 required
               />
