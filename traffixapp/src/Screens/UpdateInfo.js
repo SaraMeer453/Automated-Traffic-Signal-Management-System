@@ -6,21 +6,47 @@ import '../Styles/UpdateInfo.css';
 
 const UpdateInfo = () => {
   const [formData, setFormData] = useState({
-    username: '',
+    firstName: '',
+    lastName: '',
+    employeeId: '',
     oldPassword: '',
     newPassword: '',
     confirmNewPassword: '',
     phoneNumber: '',
   });
-  const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch user data from local storage or state and set it to formData
-    const userData = {
-      username: 'exampleUser',
-      phoneNumber: '1234567890',
-    };
-    setFormData(userData);
+    const fetchUserData = async () => {
+      try {
+          const token = localStorage.getItem('token'); 
+          const response = await fetch('/api/user', {
+              method: 'GET',
+              headers: {
+                  'Authorization': `Bearer ${token}`,
+                  'Content-Type': 'application/json',
+              },
+          });
+          
+          if (!response.ok) {
+              throw new Error('Failed to fetch user data');
+          }
+          
+          const userData = await response.json();
+          console.log('Fetched user data:', userData); // Log user data
+          setFormData(prevData => ({
+              ...prevData,
+              firstName: userData.firstName,
+              lastName: userData.lastName,
+              employeeId: userData.employeeId,
+              phoneNumber: userData.phoneNumber || '',
+          }));
+      } catch (error) {
+          console.error(error);
+      }
+  }
+  
+
+    fetchUserData();
   }, []);
 
   const handleChange = (e) => {
@@ -30,25 +56,16 @@ const UpdateInfo = () => {
 
   const handleSavePassword = (e) => {
     e.preventDefault();
-    // Logic to handle password update
     console.log('Updated password data submitted:', {
       oldPassword: formData.oldPassword,
       newPassword: formData.newPassword,
     });
-    // Reset password fields after saving
-    setFormData({ ...formData, oldPassword: '', newPassword: '', confirmNewPassword: '' });
+    setFormData(prevData => ({ ...prevData, oldPassword: '', newPassword: '', confirmNewPassword: '' }));
   };
 
   const handleSavePhoneNumber = (e) => {
     e.preventDefault();
-    // Logic to handle phone number update
     console.log('Updated phone number submitted:', formData.phoneNumber);
-  };
-
-  const handleSaveUsername = (e) => {
-    e.preventDefault();
-    // Logic to handle username update
-    console.log('Updated username submitted:', formData.username);
   };
 
   return (
@@ -57,20 +74,16 @@ const UpdateInfo = () => {
       <div className="update-content">
         <Navbar />
         <h2>Update Your Information</h2>
-        
+
         <div className="form-wrapper">
-          {/* Username Section */}
+          {/* Name and Employee ID Section */}
           <div className="form-group">
-            <label htmlFor="username">Name:</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              required
-            />
-            <button type="submit" onClick={handleSaveUsername}>Save</button>
+            <label htmlFor="firstName">First Name:</label>
+            <output id="firstName">{formData.firstName}</output>
+            <label htmlFor="lastName">Last Name:</label>
+            <output id="lastName">{formData.lastName}</output>
+            <label htmlFor="employeeId">Employee ID:</label>
+            <output id="employeeId">{formData.employeeId}</output>
           </div>
 
           {/* Password Section */}

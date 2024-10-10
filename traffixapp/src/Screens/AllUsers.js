@@ -45,7 +45,8 @@ export default function AllUsers() {
                     <thead>
                         <tr>
                             <th>Employee ID</th>
-                            <th>Name</th>
+                            <th>first name</th>
+                            <th>first name</th>
                             <th>Email</th>
                             <th>Area</th>
                             <th>Sector</th>
@@ -55,8 +56,9 @@ export default function AllUsers() {
                     <tbody>
                         {accounts.map(account => (
                             <tr key={account._id}>
-                                <td>{account.EmployeeID}</td>
-                                <td>{account.username}</td>
+                                <td>{account.employeeId}</td>
+                                <td>{account.firstName}</td>
+                                <td>{account.lastName}</td>
                                 <td>{account.email}</td>
                                 <td>{account.area}</td>
                                 <td>{account.sector}</td>

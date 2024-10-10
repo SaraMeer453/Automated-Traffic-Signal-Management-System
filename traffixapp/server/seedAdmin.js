@@ -8,14 +8,17 @@ async function seedAdmin() {
     const adminExists = await User.findOne({ email: 'admin@police.gov.pk' });
     if (!adminExists) {
         const admin = new User({
-            username: 'admin',
+            firstName: 'Sara',
+            lastName: 'admin',
             email: 'admin@police.gov.pk',
             cnic: '1234567890123', // Replace with a valid CNIC
+            phoneNumber: '03016111333',
             password: 'admin1', // This will be hashed
             area: 'Islamabad',
             sector: 'Head Office',
             isAdmin: true, // Mark as admin
             employeeId: 'isb-000' // Add the employee ID here
+
         });
         
         await admin.save();

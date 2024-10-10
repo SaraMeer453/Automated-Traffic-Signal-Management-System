@@ -86,9 +86,7 @@ const handleSubmit = async (e) => {
         <p>
           <button className="link-button" onClick={() => navigate('/updateinfo')}>Forgot password?</button>
         </p>
-        <p>
-          <button className="link-button" onClick={() => navigate('/home')}>Homepage</button>
-        </p>
+       
       </div>
       <div className="image-container">
         <img src={aerialImage} alt="Aerial view" />

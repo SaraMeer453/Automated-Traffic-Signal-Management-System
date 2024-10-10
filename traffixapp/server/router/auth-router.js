@@ -1,3 +1,4 @@
+//auth-router.js
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User'); // Import the User model
@@ -7,51 +8,59 @@ const bcrypt = require('bcryptjs'); // Import bcryptjs
 // Sign-up route
 router.post('/signup', async (req, res) => {
     try {
-        const { username, employeeId, email, cnic, password, confirmPassword, area, sector } = req.body;
+        const { firstName, lastName, employeeId, email, cnic, password, confirmPassword, area, sector, phoneNumber } = req.body;
 
+        // Check if passwords match
         if (password !== confirmPassword) {
             return res.status(400).json({ message: 'Passwords do not match' });
         }
 
-        // Check if user already exists
+        // Check for existing email
         const existingUser = await User.findOne({ email });
         if (existingUser) {
-            return res.status(400).json({ message: 'User already exists' });
+            return res.status(400).json({ message: 'User with this email already exists' });
         }
 
-        // Check if employeeId already exists
+        // Check for existing employee ID
         const existingEmployeeId = await User.findOne({ employeeId });
         if (existingEmployeeId) {
-            return res.status(400).json({ message: 'Employee ID already exists' });
+            return res.status(400).json({ message: 'User with this Employee ID already exists' });
         }
 
-        // Hash the password
-         const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-        //const hashedPassword = await bcryptjs.hash(password, 10)
+        // Check for existing CNIC
+        const existingCnic = await User.findOne({ cnic });
+        if (existingCnic) {
+            return res.status(400).json({ message: 'User with this CNIC already exists' });
+        }
 
-        // Create a new user instance with the hashed password
-        const newUser = new User({
-            username,
-            employeeId,  // Add employeeId
+        // Check for existing phone number
+        const existingPhoneNumber = await User.findOne({ phoneNumber });
+        if (existingPhoneNumber) {
+            return res.status(400).json({ message: 'User with this Phone number already exists' });
+        }
+
+        // Create a new user
+        const user = new User({
+            firstName,
+            lastName,
+            employeeId,
             email,
             cnic,
-            password: hashedPassword,  // Store hashed password
+            password,
             area,
             sector,
+            phoneNumber,
         });
 
-        // Save the user to the database
-        await newUser.save();
-
-        res.status(201).json({ message: 'User created successfully' });
-    } catch (error) {
-        console.error('Error during sign-up:', error);
+        await user.save();
+        res.status(201).json({ message: 'User registered successfully' });
+    } catch (err) {
+        console.error(err);
         res.status(500).json({ message: 'Server error' });
     }
 });
 
-// Login route
+
 // Login route
 router.post('/login', async (req, res) => {
     console.log('hey');
@@ -142,7 +151,6 @@ console.log('hello');
     }
 });
 
-
 // Get the users from the db
 router.get('/accounts', async (req, res) => {
     try {
@@ -153,6 +161,27 @@ router.get('/accounts', async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
+
+router.get('/user', async (req, res) => {
+    const token = req.header('Authorization')?.replace('Bearer ', '');
+    if (!token) {
+        return res.status(401).send({ message: 'Access denied. No token provided.' });
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const user = await User.findById(decoded.id).select('firstName lastName employeeId phoneNumber'); // Adjust fields as needed
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.json(user);
+    } catch (err) {
+        console.error(err);
+        res.status(400).send({ message: 'Invalid token.' });
+    }
+});
+
+
 
 // Update user
 router.put('/accounts/:id', async (req, res) => {
